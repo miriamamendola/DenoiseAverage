@@ -26,7 +26,7 @@ class reportGenerator:
 
     def create_image_table(self, tablename):
         #aligned images
-        self.out_file.write('<div>\n')
+        self.out_file.write('<div class="w3-panel w3-pale-yellow">\n')
         self.out_file.write('<header>'  + tablename + "</header>\n")
 
         patharray = self.tabledict[tablename]
@@ -35,7 +35,7 @@ class reportGenerator:
             path_preview = patharray.get_path_to_img(i)
             print(path_preview)
             p = Path(path_preview)
-            self.out_file.write("<img src=" + '"' +  str(p.absolute()) + '" style="width:128px;"' + "/" + ">")
+            self.out_file.write("<img src=" + '"' +  str(p.absolute()) + '" style="width:128px; border-width: 1px; border-style: solid;"' + "/" + ">")
 
         self.out_file.write("\n</div>\n")
 
@@ -57,11 +57,11 @@ class reportGenerator:
 
         #body of report
         #self.out_file.write("<p>DATASET #" + self.index +"</p>\n")
-        self.out_file.write('<p id="title">' + self.title + "</p>\n")
+        self.out_file.write('<div class="w3-container w3-teal w3-center"><h1>' + self.title + "</h1></div>\n")
 
         #initial images
         self.out_file.write("<div>\n")
-        self.out_file.write('<p id="subtitle">Dataset\'s photos</p>\n')
+        self.out_file.write('<div class="w3-panel w3-red"><h2>Dataset\'s photos</h2></div>\n')
 
         # create the image tables
         self.mylog.log("Opening initial images")
@@ -79,7 +79,7 @@ class reportGenerator:
 
         self.t_log = open(self.path + "tlog/mytransformations.log","r")
 
-        self.out_file.write('<p id="subtitle">Transformation Log</p>')
+        self.out_file.write('<div class="w3-panel w3-red"><h2>Transformations Log</h2></div>\n')
         self.out_file.write('<p>' + self.t_log.read() + '</p>')
 
         #closing file
@@ -96,6 +96,6 @@ if __name__ == "__main__":
     folders = ["testdataset"]
 
     for fldr in folders:
-        folder = "" + fldr + "/"
+        folder = "C:/Users/Mimmi/Documents/GitHub/" + fldr + "/"
         rGen = reportGenerator(fldr, folder)
         rGen.generate()
